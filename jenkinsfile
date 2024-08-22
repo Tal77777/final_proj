@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('SCM Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'tal7777', url: 'https://github.com/Tal77777/final_proj.git'
+                git branch: 'main', credentialsId: 'JK-DevSecOps', url: 'https://github.com/Tal77777/final_proj.git'
             }
         }
     }
