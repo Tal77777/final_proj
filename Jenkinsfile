@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+    DOCKERHUB_CREDENTIALS = credentials('JK-DevSecOps')
+    }
 
     stages {
         stage('SCM Checkout') {
@@ -10,7 +13,13 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t tal7777/webapp:$BUILD_NUMBER .'
+                sh 'docker build -t tal7777/Stock-News:$BUILD_NUMBER .'
+            }
+        }
+
+        stage('Login to Docker Hub') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
     }
