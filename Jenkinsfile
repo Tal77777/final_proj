@@ -13,7 +13,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t tal7777/stock-news:${BUILD_NUMBER} .'  // Make sure the tag includes the build number
+                sh 'docker build -t devopscloudbootcamp/webapp:$BUILD_NUMBER .'
             }
         }
 
@@ -23,9 +23,18 @@ pipeline {
             }
         }
 
-        stage('Push Image') {
+        stage('Push Docker Image') {
             steps {
-                sh 'docker push tal7777/stock-news:${BUILD_NUMBER}'  
+                sh 'docker push devopscloudbootcamp/webapp:$BUILD_NUMBER'
+            }
+        }
+
+        stage('Deploy Application') {
+            steps {
+                sh '''
+                docker stop webapp_ctr || true
+                docker run --rm -d -p 3000:3000 --name webapp_ctr devopscloudbootcamp/webapp:${BUILD_NUMBER}
+                '''
             }
         }
     }
