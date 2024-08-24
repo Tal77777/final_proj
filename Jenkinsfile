@@ -13,7 +13,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t devopscloudbootcamp/webapp:$BUILD_NUMBER .'
+                sh 'docker build -t tal7777/stock-news:$BUILD_NUMBER .'
             }
         }
 
@@ -23,9 +23,9 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
+        stage('Push Image') {
             steps {
-                sh 'docker push devopscloudbootcamp/webapp:$BUILD_NUMBER'
+                sh 'docker push tal7777/stock-news:$BUILD_NUMBER'
             }
         }
 
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 sh '''
                 docker stop webapp_ctr || true
-                docker run --rm -d -p 3000:3000 --name webapp_ctr devopscloudbootcamp/webapp:${BUILD_NUMBER}
+                docker run --rm -d -p 3000:3000 --name webapp_ctr tal7777/stock-news:$BUILD_NUMBER
                 '''
             }
         }
