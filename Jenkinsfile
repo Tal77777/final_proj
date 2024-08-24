@@ -19,9 +19,13 @@ pipeline {
 
         stage('Login to Docker Hub') {
             steps {
-                script {
-                    sh "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
-                }
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+
+        stage('Push Image') {
+            steps {
+                sh 'docker push tal7777/stock-news:$BUILD_NUMBER'
             }
         }
     }
