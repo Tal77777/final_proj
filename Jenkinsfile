@@ -13,7 +13,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t tal7777/Stock-News:$BUILD_NUMBER .'
+                sh 'docker build -t tal7777/stock-news:$BUILD_NUMBER .'
             }
         }
 
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
-                        sh 'docker push tal7777/Stock-News:$BUILD_NUMBER'
+                        sh 'docker push tal7777/stock-news:$BUILD_NUMBER'
                     }
                 }
             }
