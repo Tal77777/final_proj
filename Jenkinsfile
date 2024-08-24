@@ -13,7 +13,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t tal7777/stock-news:$BUILD_NUMBER .'
+                sh 'docker build -t tal7777/stock-news:${BUILD_NUMBER} .'  // Make sure the tag includes the build number
             }
         }
 
@@ -25,7 +25,7 @@ pipeline {
 
         stage('Push Image') {
             steps {
-                sh 'docker push tal7777/stock-news:$BUILD_NUMBER'
+                sh 'docker push tal7777/stock-news:${BUILD_NUMBER}'  
             }
         }
     }
