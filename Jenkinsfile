@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-    DOCKERHUB_CREDENTIALS = credentials('JK-DevSecOps')
+        DOCKERHUB_CREDENTIALS = credentials('JK-DevSecOps')
     }
 
     stages {
@@ -19,7 +19,11 @@ pipeline {
 
         stage('Login to Docker Hub') {
             steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                script {
+                    docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
+                        sh 'docker push tal7777/Stock-News:$BUILD_NUMBER'
+                    }
+                }
             }
         }
     }
