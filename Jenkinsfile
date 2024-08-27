@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "tal7777/stock-news"
+        DOCKER_IMAGE = "tal7777/stock-news-app"
         DOCKERHUB_CREDENTIALS = credentials('JK-DevSecOps')
         GIT_REPO_URL = 'https://github.com/Tal77777/final_proj.git'
         GIT_CREDENTIALS_ID = 'JK-DevSecOps'
