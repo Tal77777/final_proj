@@ -18,8 +18,8 @@ This project is a Flask-based web application that allows users to input a stock
 - **`terraform`:** Contains Terraform scripts to provision an EC2 instance and set up Jenkins.
 
 ## Connection Instructions
-http://51.20.63.159:8080/job/MultiA/
-http://51.20.63.159:3000
+http://16.171.55.43:8080/
+http://16.171.55.43:3000
 
 
 ### Prerequisites
