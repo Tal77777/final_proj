@@ -16,6 +16,10 @@ pipeline {
                     echo "Checking out the repository from branch: main"
                     git branch: 'main', credentialsId: GIT_CREDENTIALS_ID, url: GIT_REPO_URL
                     
+                    // Clean up any previous images
+                    echo 'Cleaning up old Docker images...'
+                    sh "docker rmi ${DOCKER_IMAGE}:${BUILD_NUMBER} || true"
+
                     // Build the Docker image
                     echo 'Building the Docker image...'
                     sh "docker build -t ${DOCKER_IMAGE}:${BUILD_NUMBER} ."
@@ -40,11 +44,16 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Deploy the application
-                    echo 'Deploying the application...'
+                    // Clean up any running container with the same name
+                    echo 'Stopping and removing old containers...'
                     sh '''
                     docker stop webapp_ctr || true
                     docker rm webapp_ctr || true
+                    '''
+                    
+                    // Deploy the application
+                    echo 'Deploying the application...'
+                    sh '''
                     docker run --rm -d -p 3000:3000 --name webapp_ctr ${DOCKER_IMAGE}:${BUILD_NUMBER}
                     '''
                 }
