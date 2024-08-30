@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "tal7777/stock-news-app"
+        DOCKER_IMAGE = "tal7777/stock-get-news-application"
         DOCKERHUB_CREDENTIALS = credentials('JK-DevSecOps')
         GIT_REPO_URL = 'https://github.com/Tal77777/final_proj.git'
         GIT_CREDENTIALS_ID = 'JK-DevSecOps'
@@ -13,8 +13,8 @@ pipeline {
             steps {
                 script {
                     // Checkout the repository
-                    echo "Checking out the repository from branch: main"
-                    git branch: 'main', credentialsId: GIT_CREDENTIALS_ID, url: GIT_REPO_URL
+                    echo "Checking out the repository from branch: ${env.BRANCH_NAME}"
+                    git branch: env.BRANCH_NAME, credentialsId: GIT_CREDENTIALS_ID, url: GIT_REPO_URL
                     
                     // Clean up any previous images
                     echo 'Cleaning up old Docker images...'
@@ -28,6 +28,22 @@ pipeline {
         }
 
         stage('Test') {
+            when {
+                not {
+                    branch 'main'
+                }
+            }
+            steps {
+                script {
+                    echo 'Running tests'
+                }
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            when {
+                branch 'main'
+            }
             steps {
                 script {
                     // Docker login to Docker Hub
