@@ -1,0 +1,8 @@
+.venv
+__pycache__
+README
+README.md
+terraform.tfstate
+terraform.tfstate.backup
+jenkinsfile_old
+.terraform.lock.hcl
