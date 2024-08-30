@@ -2,17 +2,32 @@
 <html>
 <head>
     <title>News Articles</title>
+    <style>
+        .highlight-green {
+            color: green;
+        }
+    </style>
 </head>
 <body>
     <h1>News Articles</h1>
-    <ul>
-        {% for article in articles %}
-        <li>
-            <h2>{{ article.title }}</h2>
-            <p>{{ article.content }}</p>
-        </li>
-        {% endfor %}
-    </ul>
-    <a href="/">Back Home</a>
+    <div id="articles">
+        <!-- Replace this with your actual content -->
+        This is an article about a reverse stock split. The company also discussed its patent strategy and dollar earnings in the latest report. They are planning to merge with another firm soon.
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const wordsToHighlight = ["reverse", "patent", "dollar", "split", "merge", "report"];
+            const articlesDiv = document.getElementById("articles");
+            let content = articlesDiv.innerHTML;
+
+            wordsToHighlight.forEach(word => {
+                const regex = new RegExp(`\\b(${word})\\b`, 'gi');
+                content = content.replace(regex, `<span class="highlight-green">$1</span>`);
+            });
+
+            articlesDiv.innerHTML = content;
+        });
+    </script>
 </body>
 </html>
