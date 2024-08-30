@@ -42,6 +42,9 @@ pipeline {
         }
 
         stage('Deploy') {
+            when {
+                branch 'main' // This ensures the deployment only happens on the 'main' branch
+            }
             steps {
                 script {
                     // Clean up any running container with the same name
