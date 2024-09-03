@@ -22,8 +22,8 @@ This project is a Flask-based web application that allows users to input a stock
 
 ## Connection Instructions
 
-- **Jenkins Dashboard:** [http://51.21.127.55:8080/job/MultiA/](http://51.21.127.55:8080/job/MultiA/)
-- **Application Access:** [http://51.21.127.55:3000](http://51.21.127.55:3000)
+- **Jenkins Dashboard:** http://51.20.94.222:8080
+- **Application Access:** http://51.20.94.222:3000
 
 ## Prerequisites
 
